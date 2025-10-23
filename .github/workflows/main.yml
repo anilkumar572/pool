@@ -13,28 +13,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: dev
-
-
-      # Step 3: Verify Flutter & Dart version
-      - name: Flutter & Dart version
+      # Step 2: Install Flutter (dev channel, Dart 3.5+)
+      - name: Install Flutter dev
         run: |
+          git clone -b dev https://github.com/flutter/flutter.git $HOME/flutter
+          export PATH="$HOME/flutter/bin:$PATH"
           flutter --version
-          dart --version
 
-      # Step 4: Install dependencies
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # Step 5: Build Flutter Web
+      # Step 4: Build Flutter Web
       - name: Build Flutter Web
         run: flutter build web --release --base-href /
 
-      # Step 6: Deploy to GitHub Pages
+      # Step 5: Deploy to GitHub Pages
       - name: Deploy web to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
