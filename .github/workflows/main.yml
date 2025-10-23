@@ -17,8 +17,9 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.6' # Flutter with Dart 3.5+
-          channel: stable
+          flutter-version: '4.0.0-0.0.pre.7' # Flutter 4.0 dev with Dart 3.5+
+          channel: dev
+
 
       # Step 3: Verify Flutter & Dart version
       - name: Flutter & Dart version
