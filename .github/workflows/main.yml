@@ -8,6 +8,7 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
       # Step 1: Checkout code
       - name: Checkout repository
@@ -18,17 +19,22 @@ jobs:
         run: |
           git clone -b dev https://github.com/flutter/flutter.git $HOME/flutter
           echo "$HOME/flutter/bin" >> $GITHUB_PATH
-          flutter --version
 
-      # Step 3: Install dependencies
+      # Step 3: Verify Flutter & Dart version
+      - name: Check Flutter & Dart versions
+        run: |
+          flutter --version
+          dart --version
+
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # Step 4: Build Flutter Web
+      # Step 5: Build Flutter Web
       - name: Build Flutter Web
         run: flutter build web --release --base-href /
 
-      # Step 5: Deploy to GitHub Pages
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy web to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
