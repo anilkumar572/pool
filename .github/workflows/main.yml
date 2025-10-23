@@ -13,11 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Install Flutter (dev channel, Dart 3.5+)
+      # Step 2: Install Flutter dev channel (Dart 3.5+)
       - name: Install Flutter dev
         run: |
           git clone -b dev https://github.com/flutter/flutter.git $HOME/flutter
-          export PATH="$HOME/flutter/bin:$PATH"
+          echo "$HOME/flutter/bin" >> $GITHUB_PATH
           flutter --version
 
       # Step 3: Install dependencies
